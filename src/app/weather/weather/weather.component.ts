@@ -36,12 +36,16 @@ export class WeatherComponent implements OnInit {
     private locationService: LocationService,
     private weatherService: WeatherService
   ) {
-    locationService.location$.subscribe((location) => {
-      weatherService.getCurrentWeather(location).subscribe((weather) => {
-        this.currentWeather = weather;
-        console.log(this.currentWeather);
-      });
-    });
+    locationService.location$.subscribe(
+      (location) => {
+        weatherService.getCurrentWeather(location).subscribe(
+          (weather) => {
+            this.currentWeather = weather;
+            // console.log(this.currentWeather);
+          }
+        );
+      }
+    );
   }
 
   ngOnInit(): void {

@@ -8,19 +8,22 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
-  location: any;
   forecast: any;
 
   constructor(
     private locationService: LocationService,
     private weatherService: WeatherService
   ) {
-    locationService.location$.subscribe((location) => {
-      weatherService.getForecast(location).subscribe((forecast) => {
-        this.forecast = forecast;
-        console.log('forecast component', this.forecast);
-      })
-    });
+    locationService.location$.subscribe(
+      (location) => {
+        weatherService.getForecast(location).subscribe(
+          (forecast) => {
+            this.forecast = forecast;
+            console.log('forecast component', this.forecast);
+          }
+        );
+      }
+    );
   }
 
   ngOnInit(): void {
