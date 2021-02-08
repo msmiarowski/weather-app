@@ -15,8 +15,9 @@ export class AppComponent {
     // on creation of component get the default location
     locationService.location$.subscribe((location) => {
       this.location = location;
-      console.log('location after subscription to behavior subject', this.location);
+      // console.log('location after subscription to behavior subject', this.location);
     });
+    // locationService.getCurrentLocation();
   }
 
   weatherForm = new FormGroup({
