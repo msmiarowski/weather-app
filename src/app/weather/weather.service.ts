@@ -30,7 +30,7 @@ export class WeatherService {
     return this.http.get<CurrentWeather>(this.weatherApiUrl, {
       params: {
         'lat': location.lat,
-        'lon': location.long,
+        'lon': location.lon,
         'units': 'imperial',
         'appid': this.apiKey
       }
@@ -65,11 +65,11 @@ export class WeatherService {
   }
 
   getForecast(location: any) {
-    console.log('getForecast', location);
+    //console.log('getForecast', location);
     return this.http.get<Forecast>(this.forecastApiUrl, {
       params: {
         'lat': location.lat,
-        'lon': location.long,
+        'lon': location.lon,
         'units': 'imperial',
         'appid': this.apiKey
       }

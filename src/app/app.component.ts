@@ -17,7 +17,6 @@ export class AppComponent {
       this.location = location;
       // console.log('location after subscription to behavior subject', this.location);
     });
-    // locationService.getCurrentLocation();
   }
 
   weatherForm = new FormGroup({

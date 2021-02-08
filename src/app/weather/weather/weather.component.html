@@ -17,6 +17,25 @@
           min: {{ currentWeather.main.temp_min | number:'1.0-0' }}°F / max: {{ currentWeather.main.temp_max | number:'1.0-0'}}°F
         </p>
       </div>
+      <!-- PROBABLY SHOULD BE A SEPARATE COMPONENT -->
+      <tui-accordion class="container tui-space_top-4">
+        <tui-accordion-item>
+          Details
+          <ng-template tuiAccordionItemContent>
+            Feels Like: {{ currentWeather.main.feels_like | number:'1.0-0' }}
+            <br>
+            Humidity: {{ currentWeather.main.humidity }}
+            <br>
+            <ng-container *ngIf="currentWeather.wind.speed">
+              wind {{ currentWeather.wind.speed | number:'1.0-0' }}mph
+              <br>
+              wind (gust): {{ currentWeather.wind.gust | number:'1.0-0' }}mph
+              <br>
+              wind direction: {{ currentWeather.wind.deg | convertDegree }}
+            </ng-container>
+          </ng-template>
+        </tui-accordion-item>
+      </tui-accordion>
     </tui-island>
   </div>
 </ng-container>
