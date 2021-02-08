@@ -41,7 +41,7 @@ export class WeatherComponent implements OnInit {
         weatherService.getCurrentWeather(location).subscribe(
           (weather) => {
             this.currentWeather = weather;
-            // console.log(this.currentWeather);
+            console.log(this.currentWeather);
           }
         );
       }

@@ -19,7 +19,7 @@ export class ForecastComponent implements OnInit {
         weatherService.getForecast(location).subscribe(
           (forecast) => {
             this.forecast = forecast;
-            console.log('forecast component', this.forecast);
+            // console.log('forecast component', this.forecast);
           }
         );
       }

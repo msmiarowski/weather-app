@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import { WeatherComponent } from './weather/weather.component';
 import { ForecastComponent } from './forecast/forecast.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TuiIslandModule } from '@taiga-ui/kit';
+import { TuiIslandModule, TuiAccordionModule } from '@taiga-ui/kit';
 import { ConvertIconPipe } from './convert-icon.pipe';
 import { TuiHintModule } from '@taiga-ui/core';
+import { ConvertDegreePipe } from './convert-degree.pipe';
 
 
 @NgModule({
-  declarations: [WeatherComponent, ForecastComponent, ConvertIconPipe],
+  declarations: [WeatherComponent, ForecastComponent, ConvertIconPipe, ConvertDegreePipe],
   imports: [
     CommonModule,
     HttpClientModule,
     TuiIslandModule,
-    TuiHintModule
+    TuiHintModule,
+    TuiAccordionModule
   ],
   exports: [WeatherComponent, ForecastComponent]
 })
