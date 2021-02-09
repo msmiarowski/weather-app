@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { LocationService } from './location.service';
 
 @Component({
@@ -9,21 +10,28 @@ import { LocationService } from './location.service';
 })
 export class AppComponent {
   title = 'weather-app';
-  location: any;
-
-  constructor(private locationService: LocationService) {
-    // on creation of component get the default location
-    locationService.location$.subscribe((location) => {
-      this.location = location;
-      // console.log('location after subscription to behavior subject', this.location);
-    });
-  }
+  // coords = {
+  //   lat: 0,
+  //   lon: 0
+  // }
+  location$: BehaviorSubject<{}>;
 
   weatherForm = new FormGroup({
     searchInput: new FormControl('', [
       Validators.required
     ])
   });
+
+  constructor(private locationService: LocationService) {
+    // on creation of component get the default location
+    // this.location$ = locationService.location$;
+    // console.log('app component constructor', this.location$);
+  }
+
+  ngOnInit() {
+    this.location$ = this.locationService.location$;
+    console.log('app component constructor', this.location$);
+  }
 
   onSubmit() {
     // if the form isn't valid don't continue

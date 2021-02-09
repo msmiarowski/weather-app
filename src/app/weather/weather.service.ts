@@ -11,7 +11,7 @@ import { Forecast } from './forecast';
 })
 export class WeatherService {
   // api docs for current weather https://openweathermap.org/current
-  //location: any;
+  location: any;
   weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
   apiKey = '64348c0c33e4c8b0e4f8b7d6c55e4b47';
@@ -20,17 +20,17 @@ export class WeatherService {
     private http: HttpClient,
     private locationService: LocationService
   ) {
-    // locationService.location$.subscribe((location) => {
-    //   this.location = location;
-    // });
+    locationService.location$.subscribe((location) => {
+      this.location = location;
+    });
   }
 
-  getCurrentWeather(location: any) {
+  getCurrentWeather(lat: any, lon: any,) {
     // console.log('getCurrentWeather', location);
     return this.http.get<CurrentWeather>(this.weatherApiUrl, {
       params: {
-        'lat': location.lat,
-        'lon': location.lon,
+        'lat': lat,
+        'lon': lon,
         'units': 'imperial',
         'appid': this.apiKey
       }
@@ -64,12 +64,12 @@ export class WeatherService {
     );
   }
 
-  getForecast(location: any) {
+  getForecast(lat: any, lon: any) {
     //console.log('getForecast', location);
     return this.http.get<Forecast>(this.forecastApiUrl, {
       params: {
-        'lat': location.lat,
-        'lon': location.lon,
+        'lat': lat,
+        'lon': lon,
         'units': 'imperial',
         'appid': this.apiKey
       }
