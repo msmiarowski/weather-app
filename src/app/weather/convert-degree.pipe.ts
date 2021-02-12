@@ -16,7 +16,7 @@ export class ConvertDegreePipe implements PipeTransform {
 
       - return the index of the array modulo (remainder) of 16
     */
-    let degree: number = Math.floor((value / 22.5) + .5);
+    let degree: number = Math.trunc((value / 22.5));
 
     const direction: string[] = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 

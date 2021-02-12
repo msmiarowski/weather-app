@@ -6,7 +6,7 @@ import { WeatherService } from '../weather.service';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css']
+  styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
   location$: BehaviorSubject<any>;
@@ -43,13 +43,11 @@ export class WeatherComponent implements OnInit {
     this.locationService.getLocation().subscribe(
       (userData) => {
         let { lat, lon } = userData;
-        this.weatherService.getCurrentWeather(lat, lon).subscribe(
-          (weather) => {
-            this.currentWeather = weather;
-            this.locationService.location$.next({lat, lon});
-            console.log('current weather', this.currentWeather);
-          }
-        )
+        this.weatherService.getCurrentWeather(lat, lon).subscribe((weather) => {
+          this.currentWeather = weather;
+          this.locationService.location$.next({ lat, lon });
+          console.log('current weather', this.currentWeather);
+        });
       },
       (error) => {
         console.log('there was an error getting your location', error);
@@ -57,8 +55,5 @@ export class WeatherComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }

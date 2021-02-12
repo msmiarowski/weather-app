@@ -6,27 +6,17 @@ import { LocationService } from './location.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'weather-app';
-  // coords = {
-  //   lat: 0,
-  //   lon: 0
-  // }
   location$: BehaviorSubject<{}>;
 
   weatherForm = new FormGroup({
-    searchInput: new FormControl('', [
-      Validators.required
-    ])
+    searchInput: new FormControl('', [Validators.required]),
   });
 
-  constructor(private locationService: LocationService) {
-    // on creation of component get the default location
-    // this.location$ = locationService.location$;
-    // console.log('app component constructor', this.location$);
-  }
+  constructor(private locationService: LocationService) {}
 
   ngOnInit() {
     this.location$ = this.locationService.location$;
@@ -35,16 +25,21 @@ export class AppComponent {
 
   onSubmit() {
     // if the form isn't valid don't continue
-    if(this.weatherForm.invalid) return;
-
-    // *****
-    // TODO: set up check for num V string to search via ZIP or CITY NAME
-    // *****
+    if (this.weatherForm.invalid) return;
 
     // get zip code from input convert to number
-    let userLocationInput = this.weatherForm.value.searchInput;
+    let userLocationInput: string = this.weatherForm.value.searchInput;
+    if (!Number(userLocationInput)) {
+      // if string = searching by city name
+      console.log(userLocationInput);
+      // TODO: METHOD TO GET WEATHER BY CITY NAME
+    } else {
+      // searching by zip code
+      console.log(Number(userLocationInput));
+      // TODO: METHOD TO GET WEATHER BY ZIP CODE
+    }
 
     // update the app state/user location so all components that subscribe have the correct info
-    this.locationService.location$.next(userLocationInput);
+    // this.locationService.location$.next(userLocationInput);
   }
 }
