@@ -9,12 +9,23 @@
             Zip Code or City Name
           </tui-input>
 
-          <ng-container *ngIf="weatherForm.controls.searchInput.touched && weatherForm.controls.searchInput.invalid">
-            <div class="alert alert-danger tui-space_top-3 tui-text-body-m-2 tui-text_bold" role="alert">
+          <ng-container
+            *ngIf="
+              weatherForm.controls.searchInput.touched &&
+              weatherForm.controls.searchInput.invalid
+            "
+          >
+            <div
+              class="alert alert-danger tui-space_top-3 tui-text-body-m-2 tui-text_bold"
+              role="alert"
+            >
               <div class="alert-items">
                 <div class="alert-item static">
                   <div class="alert-icon-wrapper">
-                    <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                    <clr-icon
+                      class="alert-icon"
+                      shape="exclamation-circle"
+                    ></clr-icon>
                   </div>
                   <span class="alert-text">
                     Zip Code or City Name is required
@@ -24,23 +35,27 @@
             </div>
           </ng-container>
 
-          <button tuiButton type="submit" aria-label="search" class="tui-space_top-4 tui-space_bottom-4" [disabled]="weatherForm.invalid">
-              Search
+          <button
+            tuiButton
+            type="submit"
+            aria-label="search"
+            class="tui-space_top-4 tui-space_bottom-4"
+            [disabled]="weatherForm.invalid"
+          >
+            Search
           </button>
         </form>
 
-
-        ~~~~~~~~~~<br>
-        <b>form debugging</b><br>
-        Form Contents: {{ weatherForm.value | json }}<br>
-        Form is valid: {{ weatherForm.valid }}<br>
-        Form is touched: {{ weatherForm.controls.searchInput.touched }}<br>
+        ~~~~~~~~~~<br />
+        <b>form debugging</b><br />
+        Form Contents: {{ weatherForm.value | json }}<br />
+        Form is valid: {{ weatherForm.valid }}<br />
+        Form is touched: {{ weatherForm.controls.searchInput.touched }}<br />
         ~~~~~~~~~~
-
       </div>
     </div>
 
     <app-weather></app-weather>
     <app-forecast></app-forecast>
-</div>
+  </div>
 </tui-root>

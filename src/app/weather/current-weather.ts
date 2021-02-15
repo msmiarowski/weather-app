@@ -1,5 +1,5 @@
 export interface CurrentWeather {
-  name: string;
+  cityName: string;
   weather: {
     id: number;
     main: string;
@@ -18,6 +18,6 @@ export interface CurrentWeather {
     gust: number;
     deg: number;
   };
-  dt: number;
+  dt: Date;
   timezone: number;
 }

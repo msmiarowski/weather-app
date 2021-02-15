@@ -8,14 +8,19 @@ import { map } from 'rxjs/operators';
 })
 export class LocationService {
   // default value off Ann Arbor, Michigan. LAT: 42.279594, LON:  -83.732124
-  coords = {
-    lat: 0,
-    lon: 0,
+  queryConfig = {
+    units: 'imperial',
+    appid: '64348c0c33e4c8b0e4f8b7d6c55e4b47',
   };
   // send location to subscribed components
   location$ = new BehaviorSubject({});
 
   constructor(private http: HttpClient) {}
+
+  updateLocation(value: any) {
+    let newLocation = Object.assign(value, this.queryConfig);
+    this.location$.next(newLocation);
+  }
 
   /*
     GET USER'S LOCATION W/ THE WINDOW GEO LOCATION
@@ -37,12 +42,15 @@ export class LocationService {
   //   );
   // }
 
-  getLocation() {
+  getLocation(): Observable<any> {
     // get user's ip address then lat/lon
-    return this.http.get<any>('http://ip-api.com/json/', {
-      headers: {
-        SameSite: 'Strict',
-      },
-    });
+    return this.http.get<any>('http://ip-api.com/json/').pipe(
+      map((value) => {
+        return {
+          lat: value.lat,
+          lon: value.lon,
+        };
+      })
+    );
   }
 }
