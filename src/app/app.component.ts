@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { LocationService } from './location.service';
+import { WeatherService } from './weather/weather.service';
 
 @Component({
   selector: 'app-root',
@@ -10,36 +11,47 @@ import { LocationService } from './location.service';
 })
 export class AppComponent {
   title = 'weather-app';
-  location$: BehaviorSubject<{}>;
+  userInput: string = '';
 
   weatherForm = new FormGroup({
     searchInput: new FormControl('', [Validators.required]),
   });
 
-  constructor(private locationService: LocationService) {}
-
-  ngOnInit() {
-    this.location$ = this.locationService.location$;
-    console.log('app component constructor', this.location$);
+  constructor( private weatherService: WeatherService ) {
+    // get default location
+    this.weatherService.getDefaultLocation().subscribe((location) => {
+      this.updateWeather(location);
+    });
   }
+
+  ngOnInit() { }
 
   onSubmit() {
     // if the form isn't valid don't continue
     if (this.weatherForm.invalid) return;
 
-    // get zip code from input convert to number
-    let userLocationInput: string = this.weatherForm.value.searchInput;
-    if (!Number(userLocationInput)) {
-      // if string = searching by city name
-      console.log(userLocationInput);
-      // TODO: METHOD TO GET WEATHER BY CITY NAME
+    // get value from input
+    this.userInput = this.weatherForm.value.searchInput;
+
+    // if value = string searching by city name
+    if (!Number(this.userInput)) {
+      let queryData = { 'q': this.userInput }
+      this.updateWeather(queryData);
     } else {
       // searching by zip code
-      console.log(Number(userLocationInput));
-      // TODO: METHOD TO GET WEATHER BY ZIP CODE
+      let queryData = { 'zip': this.userInput }
+      this.updateWeather(queryData);
     }
+  }
 
-    // update the app state/user location so all components that subscribe have the correct info
-    // this.locationService.location$.next(userLocationInput);
+  updateWeather(locationData: {}) {
+    // pass new location object so subscribers have it: object
+    this.weatherService.location$.next(locationData);
+    // new weather data : object
+    this.weatherService.getCurrentWeather(locationData);
+    // new forecast data : array of objects
+    this.weatherService.getForecast(locationData).subscribe((forecast) => {
+      this.weatherService.currentForecast$.next(forecast);
+    });
   }
 }

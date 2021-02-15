@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocationService } from 'src/app/location.service';
 import { WeatherService } from '../weather.service';
+import { CurrentWeather } from './../current-weather';
+
 
 @Component({
   selector: 'app-weather',
@@ -9,7 +11,7 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
-  location$: BehaviorSubject<any>;
+  weather: {};
   currentWeather: {
     cityName: string;
     weather: {
@@ -33,27 +35,14 @@ export class WeatherComponent implements OnInit {
     dt: Date;
     timezone: number;
   };
+  location$: any;
 
-  constructor(
-    private locationService: LocationService,
-    private weatherService: WeatherService
-  ) {
-    this.location$ = locationService.location$;
-    console.log('weather component constructor', this.location$);
-    this.locationService.getLocation().subscribe(
-      (userData) => {
-        let { lat, lon } = userData;
-        this.weatherService.getCurrentWeather(lat, lon).subscribe((weather) => {
-          this.currentWeather = weather;
-          this.locationService.location$.next({ lat, lon });
-          console.log('current weather', this.currentWeather);
-        });
-      },
-      (error) => {
-        console.log('there was an error getting your location', error);
-      }
-    );
+  constructor( private weatherService: WeatherService ) {
+    this.weatherService.currentWeather.subscribe((weatherData) => {
+      this.currentWeather = weatherData;
+      console.log(this.currentWeather);
+    })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
