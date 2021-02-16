@@ -11,27 +11,20 @@ import { CurrentWeather } from './../current-weather';
   styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
-  weather: {};
   currentWeather: {
     cityName: string;
-    weather: {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    };
-    main: {
-      temp: number;
-      feels_like: number;
-      temp_min: number;
-      temp_max: number;
-      humidity: number;
-    };
-    wind: {
-      speed: number;
-      gust: number;
-      deg: number;
-    };
+    weatherId: number;
+    weatherMain: string;
+    weatherDesc: string;
+    weatherIcon: string;
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    humidity: number;
+    windSpeed: number;
+    windGust: number;
+    windDeg: number;
     dt: Date;
     timezone: number;
   };
@@ -40,8 +33,8 @@ export class WeatherComponent implements OnInit {
   constructor( private weatherService: WeatherService ) {
     this.weatherService.currentWeather.subscribe((weatherData) => {
       this.currentWeather = weatherData;
-      console.log(this.currentWeather);
-    })
+      console.log('weather component', this.currentWeather);
+    });
   }
 
   ngOnInit(): void { }

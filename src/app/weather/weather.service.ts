@@ -76,24 +76,18 @@ export class WeatherService {
         map((value) => {
           return {
             cityName: value.name,
-            weather: {
-              id: value.weather[0].id,
-              main: value.weather[0].main,
-              description: value.weather[0].description,
-              icon: value.weather[0].icon,
-            },
-            main: {
-              temp: value.main.temp,
-              feels_like: value.main.feels_like,
-              temp_min: value.main.temp_min,
-              temp_max: value.main.temp_max,
-              humidity: value.main.humidity,
-            },
-            wind: {
-              speed: value.wind.speed,
-              gust: value.wind.gust,
-              deg: value.wind.deg,
-            },
+            weatherId: value.weather[0].id,
+            weatherMain: value.weather[0].main,
+            weatherDesc: value.weather[0].description,
+            weatherIcon: value.weather[0].icon,
+            temp: value.main.temp,
+            feels_like: value.main.feels_like,
+            temp_min: value.main.temp_min,
+            temp_max: value.main.temp_max,
+            humidity: value.main.humidity,
+            windSpeed: value.wind.speed,
+            windGust: value.wind.gust,
+            windDeg: value.wind.deg,
             dt: new Date(value.dt * 1000),
             timezone: value.timezone,
           };
