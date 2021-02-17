@@ -1,0 +1,20 @@
+<tui-accordion class="container tui-space_top-4">
+  <tui-accordion-item>
+    Details
+    <ng-template tuiAccordionItemContent>
+      Feels Like: {{ weatherDetails.feels_like | number:'1.0-0' }}°F
+      <br>
+      Humidity: {{ weatherDetails.humidity }}
+      <br>
+      <ng-container *ngIf="weatherDetails.windSpeed">
+        wind {{ weatherDetails.windSpeed | number:'1.0-0' }}mph
+        <br>
+        <span *ngIf="weatherDetails.windGust">
+          wind (gust): {{ weatherDetails.windGust | number:'1.0-0' }}mph
+        </span>
+        <br>
+        wind direction: {{ weatherDetails.windDeg | convertDegree }}
+      </ng-container>
+    </ng-template>
+  </tui-accordion-item>
+</tui-accordion>

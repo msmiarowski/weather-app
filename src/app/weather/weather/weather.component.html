@@ -14,7 +14,7 @@
       <div class="island-content">
         <p class="tui-island__paragraph tui-text_body-xl tui-text_bold">
           <span class="temp">{{ currentWeather.temp | number:'1.0-0' }}°F</span>
-          <span class="icon"><i class="fa fa-{{ currentWeather.weatherId | convertIcon }}"></i></span>
+          <span *ngIf="currentWeather.weatherId" class="icon"><i class="fa fa-{{ currentWeather.weatherId | convertIcon }}"></i></span>
         </p>
         <p class="tui-island__paragraph">
           {{ currentWeather.weatherDesc }}
@@ -23,12 +23,13 @@
           min: {{ currentWeather.temp_min | number:'1.0-0' }}°F / max: {{ currentWeather.temp_max | number:'1.0-0'}}°F
         </p>
       </div>
+      <app-weather-details [weatherDetails]="weatherDetails"></app-weather-details>
       <!-- PROBABLY SHOULD BE A SEPARATE COMPONENT -->
-      <tui-accordion class="container tui-space_top-4">
+      <!-- <tui-accordion class="container tui-space_top-4">
         <tui-accordion-item>
           Details
           <ng-template tuiAccordionItemContent>
-            Feels Like: {{ currentWeather.feels_like | number:'1.0-0' }}
+            Feels Like: {{ currentWeather.feels_like | number:'1.0-0' }}°F
             <br>
             Humidity: {{ currentWeather.humidity }}
             <br>
@@ -43,7 +44,7 @@
             </ng-container>
           </ng-template>
         </tui-accordion-item>
-      </tui-accordion>
+      </tui-accordion> -->
     </tui-island>
   </div>
 </ng-container>

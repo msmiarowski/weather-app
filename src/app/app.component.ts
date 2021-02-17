@@ -35,6 +35,7 @@ export class AppComponent {
 
     // if value = string searching by city name
     if (!Number(this.userInput)) {
+      console.log(this.userInput.split(','));
       let queryData = { 'q': this.userInput }
       this.updateWeather(queryData);
     } else {

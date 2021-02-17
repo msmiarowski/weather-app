@@ -1,9 +1,5 @@
-import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { LocationService } from 'src/app/location.service';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../weather.service';
-import { CurrentWeather } from './../current-weather';
-
 
 @Component({
   selector: 'app-weather',
@@ -28,7 +24,13 @@ export class WeatherComponent implements OnInit {
     dt: Date;
     timezone: number;
   };
-  location$: any;
+  weatherDetails = {
+    feels_like: 63,
+    humidity: 33,
+    windSpeed: 5,
+    windGust: 12,
+    windDeg: 360
+  };
 
   constructor( private weatherService: WeatherService ) {
     this.weatherService.currentWeather.subscribe((weatherData) => {
@@ -37,5 +39,5 @@ export class WeatherComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { console.log(this.weatherDetails) }
 }
