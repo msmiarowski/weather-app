@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeatherModule } from './weather/weather.module';
 import { HttpClientModule } from '@angular/common/http';
-import { TuiRootModule, TuiButtonModule } from '@taiga-ui/core';
+import { TuiRootModule, TuiButtonModule, iconsPathFactory, TUI_ICONS_PATH } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
 
 @NgModule({
@@ -28,7 +28,12 @@ import { TuiInputModule } from '@taiga-ui/kit';
     TuiInputModule,
     TuiButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: TUI_ICONS_PATH,
+      useValue: iconsPathFactory('assets/taiga-ui/icons/'),
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,6 @@ export class ForecastComponent implements OnInit {
 
   constructor( private weatherService: WeatherService ) {
     this.forecast$ = this.weatherService.currentForecast;
-    console.log('forecast component', this.forecast$);
   }
 
   ngOnInit(): void { }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { LocationService } from './location.service';
 import { WeatherService } from './weather/weather.service';
 
 @Component({
@@ -35,7 +33,6 @@ export class AppComponent {
 
     // if value = string searching by city name
     if (!Number(this.userInput)) {
-      console.log(this.userInput.split(','));
       let queryData = { 'q': this.userInput }
       this.updateWeather(queryData);
     } else {

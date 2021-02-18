@@ -1,3 +1,7 @@
+:host {
+  margin-left: -20px;
+  margin-right: -20px;
+}
 .tui-island {
   text-align: center;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { WeatherService } from '../weather.service';
 
 @Component({
@@ -24,20 +25,12 @@ export class WeatherComponent implements OnInit {
     dt: Date;
     timezone: number;
   };
-  weatherDetails = {
-    feels_like: 63,
-    humidity: 33,
-    windSpeed: 5,
-    windGust: 12,
-    windDeg: 360
-  };
 
   constructor( private weatherService: WeatherService ) {
     this.weatherService.currentWeather.subscribe((weatherData) => {
       this.currentWeather = weatherData;
-      console.log('weather component', this.currentWeather);
     });
   }
 
-  ngOnInit(): void { console.log(this.weatherDetails) }
+  ngOnInit(): void { }
 }
