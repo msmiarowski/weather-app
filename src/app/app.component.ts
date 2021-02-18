@@ -18,6 +18,7 @@ export class AppComponent {
   constructor( private weatherService: WeatherService ) {
     // get default location
     this.weatherService.getDefaultLocation().subscribe((location) => {
+      console.log(location);
       this.updateWeather(location);
     });
   }

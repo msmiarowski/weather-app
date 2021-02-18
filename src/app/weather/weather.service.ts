@@ -1,9 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocationService } from '../location.service';
-import { map, pluck, mergeMap, filter, toArray } from 'rxjs/operators';
+import { map, pluck, mergeMap, filter, toArray, retry, tap } from 'rxjs/operators';
 import { CurrentWeather } from './current-weather';
-import { BehaviorSubject, of, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, of, Observable } from 'rxjs';
 import { Forecast } from './forecast';
 
 interface WeatherApiInterface {
@@ -56,14 +55,36 @@ export class WeatherService {
 
   getDefaultLocation(): Observable<any> {
     // get user's ip address then lat/lon
-    return this.http.get<any>('http://ip-api.com/json/').pipe(
-      map((value) => {
+    return new Observable<any>((observer) => {
+      console.log('trying to get location');
+      window.navigator.geolocation.getCurrentPosition(
+        (location) => {
+          observer.next(location.coords);
+          observer.complete();
+        },
+        (error) => observer.error(error)
+      );
+    }).pipe(
+      map(coords => {
         return {
-          lat: value.lat,
-          lon: value.lon,
-        };
+          lat: coords.latitude,
+          lon: coords.longitude
+        }
       })
     );
+
+    // CAN'T USE THIS IN PROD, WOULD NEED AN API KEY
+    // NOT PAYING FOR THAT
+    // GO BACK TO OLD WAY OF USING GEOLOCATION
+
+    // return this.http.get<any>('http://ip-api.com/json/').pipe(
+    //   map((value) => {
+    //     return {
+    //       lat: value.lat,
+    //       lon: value.lon,
+    //     };
+    //   })
+    // );
   }
 
   getCurrentWeather(location: {}) {
