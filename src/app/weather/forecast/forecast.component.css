@@ -1,7 +1,13 @@
-:host {
-  margin-left: -20px;
-  margin-right: -20px;
-}
 .tui-island {
   text-align: center;
+}
+.card {
+  width: 100%;
+  /* flex: 0 1 calc(42% - 8px); */
+}
+
+@media screen and (min-width: 48.125em) {
+  .card {
+    /* flex: 0 1 calc(33% - 8px); */
+  }
 }

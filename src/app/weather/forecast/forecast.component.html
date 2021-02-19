@@ -1,5 +1,7 @@
 <div class="tui-row tui-row_adaptive">
-  <h4 class="tui-text_h4 tui-space_bottom-4 tui-space_top-2">Five Day Forecast</h4>
+  <div class="tui-col_xs-12 tui-col_s-12">
+    <h4 class="tui-text_h4 tui-space_bottom-2 tui-space_top-2">Five Day Forecast</h4>
+  </div>
 </div>
 <ng-container *ngIf="loading$ | async">
   <div class="tui-row tui-row_adaptive">LOADING forecast component</div>
@@ -7,10 +9,12 @@
 
 <ng-container *ngIf="!(loading$ | async)">
   <div class="tui-row tui-row_adaptive">
-    <tui-island *ngFor="let daily of forecast$ | async" class="tui-col_xs-12 tui-col_s-6 tui-col_md-4 tui-col_lg-2 tui-space_top-2 tui-space_right-2 tui-space_bottom-2 tui-space_left-2">
-      <p class="tui-text-body-m-2 tui-space_bottom-2 tui-island__title">{{ daily.dateString | date:'EEE L/d' }}</p>
-      <p class="tui-island__paragraph tui-text_h2">{{ daily.temp | number:'1.0-0' }}°F</p>
-      <p class="tui-island__paragraph">{{ daily.weatherDesc }} <i class="fa fa-{{ daily.weatherId | convertIcon}}"></i></p>
-    </tui-island>
+    <div *ngFor="let daily of forecast$ | async" class="tui-col_xs-6 tui-col_s-6 tui-col_md-4 flex">
+      <tui-island class="tui-space_top-2 tui-space_bottom-2 card">
+        <p class="tui-text-body-m-2 tui-space_bottom-2 tui-island__title">{{ daily.dateString | date:'EEE L/d' }}</p>
+        <p class="tui-island__paragraph tui-text_h2">{{ daily.temp | number:'1.0-0' }}°F</p>
+        <p class="tui-island__paragraph">{{ daily.weatherDesc }} <i class="fa fa-{{ daily.weatherId | convertIcon}}"></i></p>
+      </tui-island>
+    </div>
   </div>
 </ng-container>

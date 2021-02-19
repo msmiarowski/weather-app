@@ -3,3 +3,9 @@ body {
   background: rgb(9,62,121);
   background: linear-gradient(315deg, rgba(9,62,121,1) 0%, rgba(0,202,255,1) 100%);
 }
+.flex {
+  display: flex;
+}
+.flew-wrap {
+  flex-wrap: wrap;
+}
