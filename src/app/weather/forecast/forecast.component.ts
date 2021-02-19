@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LocationService } from 'src/app/location.service';
 import { WeatherService } from '../weather.service';
 import { Forecast } from './../forecast';
 
@@ -10,6 +9,10 @@ import { Forecast } from './../forecast';
   styleUrls: ['./forecast.component.css'],
 })
 export class ForecastComponent implements OnInit {
+  loading$: BehaviorSubject<boolean>;
+
+  location$: Observable<{}>;
+
   forecast$: Observable<{
     dateString: number, // date
     temp: number, // temp
@@ -19,6 +22,10 @@ export class ForecastComponent implements OnInit {
   }[]>;
 
   constructor( private weatherService: WeatherService ) {
+    this.loading$ = this.weatherService.loading$;
+
+    this.location$ = this.weatherService.location;
+
     this.forecast$ = this.weatherService.currentForecast;
   }
 

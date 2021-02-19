@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { WeatherService } from './weather/weather.service';
 
 @Component({
@@ -18,7 +19,6 @@ export class AppComponent {
   constructor( private weatherService: WeatherService ) {
     // get default location
     this.weatherService.getDefaultLocation().subscribe((location) => {
-      console.log(location);
       this.updateWeather(location);
     });
   }

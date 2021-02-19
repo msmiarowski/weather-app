@@ -33,7 +33,8 @@ interface WeatherApiInterface {
   providedIn: 'root',
 })
 export class WeatherService {
-  // api docs for current weather https://openweathermap.org/current
+  loading$ = new BehaviorSubject(true);
+
   location$ = new BehaviorSubject(<any>{});
   location = this.location$.asObservable();
 
@@ -43,6 +44,7 @@ export class WeatherService {
   currentForecast$ = new BehaviorSubject(<any>[]);
   currentForecast = this.currentForecast$.asObservable();
 
+  // api docs for current weather https://openweathermap.org/current
   weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -72,19 +74,6 @@ export class WeatherService {
         }
       })
     );
-
-    // CAN'T USE THIS IN PROD, WOULD NEED AN API KEY
-    // NOT PAYING FOR THAT
-    // GO BACK TO OLD WAY OF USING GEOLOCATION
-
-    // return this.http.get<any>('http://ip-api.com/json/').pipe(
-    //   map((value) => {
-    //     return {
-    //       lat: value.lat,
-    //       lon: value.lon,
-    //     };
-    //   })
-    // );
   }
 
   getCurrentWeather(location: {}) {
@@ -114,6 +103,7 @@ export class WeatherService {
           };
         })
       ).subscribe((weather) => {
+        this.loading$.next(false);
         this.currentWeather$.next(weather);
       })
   }

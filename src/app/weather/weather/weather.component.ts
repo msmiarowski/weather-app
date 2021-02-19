@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { WeatherService } from '../weather.service';
 
 @Component({
@@ -8,6 +8,10 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
+  loading$: BehaviorSubject<boolean>;
+
+  location$: Observable<{}>;
+
   currentWeather: {
     cityName: string;
     weatherId: number;
@@ -27,6 +31,10 @@ export class WeatherComponent implements OnInit {
   };
 
   constructor( private weatherService: WeatherService ) {
+    this.loading$ = this.weatherService.loading$;
+
+    this.location$ = this.weatherService.location;
+
     this.weatherService.currentWeather.subscribe((weatherData) => {
       this.currentWeather = weatherData;
     });
