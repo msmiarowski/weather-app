@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  /* background: rgb(9,62,121);
-  background: linear-gradient(315deg, rgba(9,62,121,1) 0%, rgba(0,202,255,1) 100%); */
-  background-color: rgba(0,202,255,1);
+  background-color: var(--tui-support-21);
+  /* background-color: var(--tui-base-02); */
 }
 .flex {
   display: flex;

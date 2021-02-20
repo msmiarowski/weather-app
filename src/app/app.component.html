@@ -4,7 +4,7 @@
       <div class="tui-col_xs-12 tui-col_s-12 tui-col_sm-12">
         <h1 class="tui-text_h1">Weather App</h1>
 
-        <form [formGroup]="weatherForm" (ngSubmit)="onSubmit()">
+        <form id="searchForm" [formGroup]="weatherForm" (ngSubmit)="onSubmit()">
           <tui-input formControlName="searchInput">Zip Code or City Name</tui-input>
 
           <ng-container *ngIf="weatherForm.controls.searchInput.touched && weatherForm.controls.searchInput.invalid">
@@ -23,7 +23,7 @@
             </div>
           </ng-container>
 
-          <button tuiIconButton type="submit" icon="tuiIconSearch" [disabled]="weatherForm.invalid"></button>
+          <button id="searchButton" tuiIconButton type="submit" icon="tuiIconSearch" [disabled]="weatherForm.invalid"></button>
         </form>
       </div>
     </div>

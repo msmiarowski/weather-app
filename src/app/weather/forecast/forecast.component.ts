@@ -26,7 +26,11 @@ export class ForecastComponent implements OnInit {
 
     this.location$ = this.weatherService.location;
 
-    this.forecast$ = this.weatherService.currentForecast;
+    // this.forecast$ = this.weatherService.currentForecast;
+
+    this.weatherService.currentForecast.subscribe((data) => {
+      this.forecast$ = data;
+    });
   }
 
   ngOnInit(): void { }

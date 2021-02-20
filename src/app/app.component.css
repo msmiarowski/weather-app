@@ -1,9 +1,17 @@
+#searchForm {
+  position: relative;
+}
+#searchButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .alert {
   padding: 8px;
   border-radius: var(--tui-radius-l);
 }
 .alert-danger {
-  background-color: var(--tui-error-bg);
+  background-color: var(--tui-base-02);
   color: var(--tui-error-fill);
   border: solid 1px var(--tui-error-fill);
 }
