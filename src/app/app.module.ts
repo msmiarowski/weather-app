@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeatherModule } from './weather/weather.module';
@@ -19,7 +18,6 @@ import { TuiInputModule } from '@taiga-ui/kit';
   imports: [
     BrowserModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ClarityModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     WeatherModule,
