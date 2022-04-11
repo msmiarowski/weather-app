@@ -40,5 +40,6 @@ export class WeatherComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 }

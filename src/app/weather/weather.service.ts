@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, pluck, mergeMap, filter, toArray, retry, tap } from 'rxjs/operators';
+import { map, pluck, mergeMap, filter, toArray, retry, tap, switchMap } from 'rxjs/operators';
 import { CurrentWeather } from './current-weather';
 import { BehaviorSubject, of, Observable } from 'rxjs';
 import { Forecast } from './forecast';
@@ -27,6 +27,17 @@ interface WeatherApiInterface {
     };
     dt: number;
     timezone: number;
+}
+
+export interface HomeNavigation {
+  id?: number,
+  ID?: number,
+  post_parent: number,
+  menu_item_parent: string,
+  object_id?: string,
+  url: string,
+  title: string,
+  menu_order?: number,
 }
 
 @Injectable({

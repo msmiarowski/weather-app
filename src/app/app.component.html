@@ -19,6 +19,9 @@
 
           <button id="searchButton" tuiIconButton type="submit" icon="tuiIconSearch" [disabled]="weatherForm.invalid"></button>
         </form>
+
+        {{ weatherForm.value | json }}
+        {{ weatherForm.valid }}
       </div>
     </div>
 
